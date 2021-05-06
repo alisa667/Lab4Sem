@@ -1,8 +1,9 @@
 package ru.nsu.ccfit;
-import java.io.InputStream;
+
 import ru.nsu.ccfit.blocks.Block;
 import ru.nsu.ccfit.exceptions.WrongBlockNameException;
 
+import java.io.InputStream;
 import java.util.Properties;
 import java.util.logging.Logger;
 
@@ -11,6 +12,7 @@ public class BlocksFactory {
     private static Logger log = Logger.getLogger(BlocksFactory.class.getName());
 
     private final Properties properties = new Properties();
+    private static BlocksFactory factory = null;
 
     private BlocksFactory() throws Exception{
         InputStream inStream = BlocksFactory.class.getResourceAsStream("blocksDefinitions.properties");
@@ -20,8 +22,9 @@ public class BlocksFactory {
     }
 
     public static BlocksFactory getInstance() throws Exception{
-        BlocksFactory factory;
-        factory = new BlocksFactory();
+        if (factory == null) {
+            factory = new BlocksFactory();
+        }
         return factory;
     }
 
