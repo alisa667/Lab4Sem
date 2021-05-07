@@ -12,7 +12,7 @@ public class BlocksFactory {
     private static Logger log = Logger.getLogger(BlocksFactory.class.getName());
 
     private final Properties properties = new Properties();
-    private static BlocksFactory factory = null;
+    private static volatile BlocksFactory factory = null;
 
     private BlocksFactory() throws Exception{
         InputStream inStream = BlocksFactory.class.getResourceAsStream("blocksDefinitions.properties");
@@ -23,7 +23,11 @@ public class BlocksFactory {
 
     public static BlocksFactory getInstance() throws Exception{
         if (factory == null) {
-            factory = new BlocksFactory();
+            synchronized (BlocksFactory.class) {
+                if (factory == null) {
+                    factory = new BlocksFactory();
+                }
+            }
         }
         return factory;
     }
