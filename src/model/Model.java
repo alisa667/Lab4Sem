@@ -17,7 +17,6 @@ public class Model {
         keysPressed = new HashMap<Keys, Boolean>();
         setKeysPressed();
         state = GameState.PLAYING;
-
     }
 
     public void move(int width, int height){
