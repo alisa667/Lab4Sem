@@ -3,11 +3,13 @@ package model;
 import java.util.HashMap;
 
 public class Model {
+    
     Ball ball;
     Player player1;
     Player player2;
     HashMap<Keys, Boolean> keysPressed;
     GameState state;
+    
     public Model(){
         ball = new Ball(300, 400);
         player1 = new Player(1);
